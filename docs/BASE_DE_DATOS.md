@@ -19,7 +19,7 @@ El diseño se divide en cuatro dominios críticos reflejados en el archivo `itsu
 Sigue estos pasos para replicar el entorno de datos en tu máquina local:
 
 ### 1. Requisitos Previos
-- Tener instalado **PostgreSQL 16** o superior.
+- Tener instalado **PostgreSQL** o superior.
 - Asegurarte de que los binarios de Postgres (como `psql`) estén en tu variable de entorno PATH.
 
 ### 2. Descarga y Preparación
