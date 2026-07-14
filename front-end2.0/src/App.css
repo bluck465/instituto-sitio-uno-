@@ -850,6 +850,39 @@ a {
   text-align: right;
 }
 
+/* ── Welcome section ── */
+.dashboard-welcome {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.dashboard-welcome h3 {
+  font-size: 1.4rem;
+  margin: 0 0 6px;
+}
+
+.dashboard-welcome__subtitle {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+}
+
+.btn-entrar {
+  background: var(--accent-strong);
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-entrar:hover {
+  opacity: 0.85;
+}
+
 /* ── Responsive dashboard ── */
 @media (max-width: 960px) {
   .dashboard-layout {
