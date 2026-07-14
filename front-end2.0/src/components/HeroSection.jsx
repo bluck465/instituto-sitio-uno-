@@ -1,17 +1,20 @@
+/**
+ * HeroSection — Sección principal (hero) de la landing page.
+ * Compone HeroCopy (texto) y HeroPanel (tarjeta) dentro de la ilustración.
+ */
+
+import { HeroCopy } from './HeroCopy'
+import { HeroPanel } from './HeroPanel'
+
 export function HeroSection({ content }) {
   return (
     <section className="hero-section" id="inicio">
-      <div className="hero-copy">
-        <span className="eyebrow">{content.eyebrow}</span>
-        <h1 className="hero-title">{content.title}</h1>
-        <p className="hero-text">{content.description}</p>
-
-        <ul className="hero-points" aria-label="Beneficios destacados">
-          {content.points.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
-      </div>
+      <HeroCopy
+        eyebrow={content.eyebrow}
+        title={content.title}
+        description={content.description}
+        points={content.points}
+      />
 
       <div className="hero-visual" aria-label="Composición visual institucional">
         <img
@@ -22,11 +25,11 @@ export function HeroSection({ content }) {
           height="280"
         />
 
-        <article className="hero-panel">
-          <span className="hero-panel-label">{content.panelLabel}</span>
-          <h3>{content.panelTitle}</h3>
-          <p>{content.panelText}</p>
-        </article>
+        <HeroPanel
+          label={content.panelLabel}
+          title={content.panelTitle}
+          text={content.panelText}
+        />
       </div>
     </section>
   )
