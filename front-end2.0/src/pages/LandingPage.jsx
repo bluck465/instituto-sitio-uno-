@@ -1,4 +1,21 @@
+/**
+ * LandingPage.jsx — Página principal (landing) del instituto.
+ *
+ * Composición de la página completa:
+ * 1. BrandHeader — Navegación superior con logo y botones de auth.
+ * 2. HeroSection — Sección principal con título, descripción y tarjeta informativa.
+ * 3. Sección "Sobre el instituto" — Texto descriptivo con SectionHeading.
+ * 4. Sección "Valores" — Grid de 3 tarjetas de valores institucionales.
+ * 5. SiteFooter — Pie de página.
+ *
+ * Todo el contenido (textos, valores) está definido como objetos estáticos
+ * al inicio del archivo para facilitar su mantenimiento.
+ */
+
 import { BrandHeader, HeroSection, SectionHeading, ValueGrid, SiteFooter } from '../components'
+
+// ── Contenido estático de la landing ─────────────────────────────────
+// Cada objeto agrupa los textos de una sección para mantener el JSX limpio.
 
 const hero = {
   eyebrow: 'Campus digital',
@@ -50,13 +67,16 @@ export function LandingPage() {
       <main className="page-content">
         <BrandHeader />
 
+        {/* Hero: sección principal con CTA de login/registro */}
         <HeroSection content={hero} />
 
+        {/* Sección descriptiva sobre el instituto */}
         <section className="content-section" id="instituto">
           <SectionHeading eyebrow={intro.eyebrow} title={intro.title} />
           <p className="content-copy">{intro.description}</p>
         </section>
 
+        {/* Grid de valores institucionales */}
         <section className="content-section" id="valores">
           <SectionHeading eyebrow={values.eyebrow} title={values.title} />
           <ValueGrid items={values.items} />

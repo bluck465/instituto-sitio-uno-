@@ -27,6 +27,14 @@ Usa estos botones interactivos para explorar las diferentes dimensiones técnica
 
 El objetivo principal es reemplazar los sistemas obsoletos o procesos manuales en papel por una **SPA (Single Page Application)** ultra ligera que centraliza las operaciones en una sola pestaña del navegador. Esto garantiza una experiencia de usuario fluida, libre de recargas de página y respaldada por una alta consistencia de datos gracias a una arquitectura limpia e implacable en el backend.
 
+## 📚 Documentación Actualizada
+
+La documentación técnica y de estado del proyecto se encuentra en [README_DOCUMENTACION.md](README_DOCUMENTACION.md), donde se describe:
+
+- la estructura actual del frontend y la lógica de organización del proyecto,
+- los cambios implementados hasta ahora,
+- el estado de desarrollo y los próximos pasos.
+
 ---
 
 ## 🚀 Funcionalidades para la Vida Real

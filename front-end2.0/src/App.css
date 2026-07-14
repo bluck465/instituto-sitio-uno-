@@ -1,3 +1,4 @@
+/* ── Variables CSS (Custom Properties) ─────────────────────────── */
 :root {
   --bg: #eef2f7;
   --surface: rgba(255, 255, 255, 0.88);
@@ -13,6 +14,7 @@
   --shadow: 0 24px 80px rgba(14, 25, 47, 0.12);
 }
 
+/* ── Reset y estilos base ──────────────────────────────────────── */
 * {
   box-sizing: border-box;
 }
@@ -24,6 +26,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
+  /* Gradiente de fondo: degradado sutil con tonos azulados */
   background:
     radial-gradient(circle at top left, rgba(30, 80, 216, 0.12), transparent 30%),
     radial-gradient(circle at top right, rgba(117, 79, 255, 0.12), transparent 26%),
@@ -50,10 +53,12 @@ a {
   min-height: 100vh;
 }
 
+/* ── Shell de la aplicación ───────────────────────────────────── */
 .app-shell {
   min-height: 100vh;
 }
 
+/* ── Contenido general y secciones ─────────────────────────────── */
 .page-content {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
@@ -78,6 +83,7 @@ a {
   font-size: 1.02rem;
 }
 
+/* ── Header sticky del sitio ──────────────────────────────────── */
 .site-header {
   position: sticky;
   top: 0;
@@ -110,6 +116,7 @@ a {
   transform: translateY(-120%);
 }
 
+/* ── Logo y botones del header ─────────────────────────────────── */
 .brand-link {
   display: inline-flex;
   align-items: center;
@@ -130,6 +137,7 @@ a {
   justify-content: flex-end;
 }
 
+/* Botón base del header (outline y solid heredan de este) */
 .header-action {
   appearance: none;
   display: inline-flex;
@@ -153,18 +161,21 @@ a {
   transform: translateY(-1px);
 }
 
+/* Variante outline: borde blanco sutil, fondo transparente */
 .header-action.outline {
   border-color: rgba(255, 255, 255, 0.18);
   color: #f8fbff;
   background: rgba(255, 255, 255, 0.03);
 }
 
+/* Variante solid: fondo azul degradado con sombra */
 .header-action.solid {
   color: #fff;
   background: linear-gradient(135deg, #2f6bf0 0%, #1843b7 100%);
   box-shadow: 0 14px 24px rgba(24, 67, 183, 0.28);
 }
 
+/* ── Hero: sección principal de la landing ─────────────────────── */
 .hero-section {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
@@ -280,6 +291,7 @@ a {
   line-height: 1.72;
 }
 
+/* ── Auth: modal, formularios y mensajes de error ──────────────── */
 .auth-backdrop {
   position: fixed;
   inset: 0;
@@ -475,6 +487,7 @@ a {
   color: var(--text);
 }
 
+/* ── Dashboard: página y layout principal ──────────────────────── */
 .dashboard-page {
   padding-bottom: 28px;
 }
@@ -483,12 +496,14 @@ a {
   margin-bottom: 18px;
 }
 
+/* Layout de dos columnas: sidebar (260px) + contenido flexible */
 .dashboard-layout {
   display: grid;
   grid-template-columns: 260px minmax(0, 1fr);
   gap: 18px;
 }
 
+/* ── Tarjetas: sidebar, lista y resumen ────────────────────────── */
 .sidebar-card,
 .list-card,
 .summary-card {
@@ -521,6 +536,7 @@ a {
   padding-left: 18px;
 }
 
+/* ── Encabezado de sección (SectionHeading) ────────────────────── */
 .section-heading {
   display: grid;
   gap: 12px;
@@ -581,6 +597,7 @@ a {
   line-height: 1.75;
 }
 
+/* ── Pie de página ────────────────────────────────────────────── */
 .site-footer {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto 20px;
@@ -601,6 +618,7 @@ a {
   margin-top: 6px;
 }
 
+/* ── Responsive: tablet (≤960px) ───────────────────────────────── */
 @media (max-width: 960px) {
   .hero-section,
   .value-grid {
@@ -618,6 +636,7 @@ a {
   }
 }
 
+/* ── Responsive: móvil (≤720px) ───────────────────────────────── */
 @media (max-width: 720px) {
   .page-content {
     width: min(100% - 20px, 1120px);

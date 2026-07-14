@@ -1,3 +1,9 @@
+/**
+ * SiteFooter — Pie de página institucional.
+ * Muestra el nombre del instituto y el copyright.
+ * Se renderiza al final de la landing page.
+ */
+
 export function SiteFooter() {
   return (
     <footer className="site-footer">

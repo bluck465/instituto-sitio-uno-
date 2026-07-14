@@ -1,3 +1,10 @@
+/**
+ * index.css — Estilos globales de la aplicación.
+ * Define la fuente base (fallback de Aptos), variables root de tipografía,
+ * y reglas globales que aplican a todo el documento.
+ */
+
+/* Fuente principal: intenta Aptos, cae aSegoe UI, luego Helvetica Neue */
 @font-face {
   font-family: 'AptosFallback';
   src: local('Aptos'), local('Segoe UI'), local('Helvetica Neue');
@@ -15,6 +22,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Ancho mínimo para evitar colapso en pantallas pequeñas */
 body {
   min-width: 320px;
 }
