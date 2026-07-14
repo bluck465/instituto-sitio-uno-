@@ -3,18 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "description": "Landing page institucional construida con React y Vite, refactorizada desde el front-end estático original.",
-  "main": "eslint.config.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^19.2.6",
@@ -23,8 +16,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
@@ -32,8 +23,11 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-    "jsdom": "^29.1.1",
-    "vite": "^8.0.16",
-    "vitest": "^4.1.8"
-  }
+    "vite": "^8.0.16"
+  },
+  "description": "Landing page institucional construida con React y Vite, refactorizada desde el front-end estático original.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
