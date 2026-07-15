@@ -21,7 +21,7 @@ export function RegisterPage({ onSwitchToLogin }) {
         <span className="eyebrow">Acceso</span>
         <h2>Registrarse</h2>
         <p className="auth-page__text">
-          Completa los datos del usuario y del estudiante según la estructura de tu base de datos.
+          Crea tu cuenta con correo, contrasena y rol.
         </p>
       </header>
 

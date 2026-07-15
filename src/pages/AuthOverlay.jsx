@@ -49,7 +49,7 @@ export function AuthOverlay({ mode }) {
 
           {/* Renderizar login o registro según el modo */}
           {mode === 'login' ? (
-            <LoginPage onSwitchToRegister={() => navigate('/registro')} />
+            <LoginPage onSwitchToRegister={() => navigate('/register')} />
           ) : (
             <RegisterPage onSwitchToLogin={() => navigate('/')} />
           )}

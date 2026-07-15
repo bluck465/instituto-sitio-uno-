@@ -1,0 +1,83 @@
+import { supabase } from '../../../lib/supabaseClient'
+import { authContract } from '../../contracts/authContract'
+
+export const supabaseAuth = {
+  ...authContract,
+
+  async login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) throw error
+
+    return {
+      user: {
+        id: data.user.id,
+        email: data.user.email,
+        rol: data.user.user_metadata?.rol || 'estudiante',
+        activo: data.user.user_metadata?.activo ?? true,
+      },
+      token: data.session.access_token,
+    }
+  },
+
+  async register(payload) {
+    const { data, error } = await supabase.auth.signUp({
+      email: payload.email,
+      password: payload.password,
+      options: {
+        data: {
+          rol: payload.rol || 'estudiante',
+          activo: payload.activo !== undefined ? payload.activo : true,
+        },
+      },
+    })
+
+    if (error) throw error
+
+    const { error: userError } = await supabase.from('usuarios').insert({
+      id: data.user.id,
+      email: payload.email,
+      rol: payload.rol || 'estudiante',
+      activo: payload.activo !== undefined ? payload.activo : true,
+    })
+    if (userError) throw userError
+
+    return this.login(payload.email, payload.password)
+  },
+
+  async saveProfile(rol, profileData) {
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError) throw authError
+
+    const table = rol === 'estudiante' ? 'estudiantes'
+      : rol === 'profesor' ? 'profesores'
+      : 'administradores'
+
+    const { error } = await supabase.from(table).insert({
+      usuario_id: user.id,
+      ...profileData,
+    })
+    if (error) throw error
+  },
+
+  async getProfile(rol) {
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    if (authError) throw authError
+
+    const table = rol === 'estudiante' ? 'estudiantes'
+      : rol === 'profesor' ? 'profesores'
+      : 'administradores'
+
+    const { data, error } = await supabase.from(table).select('*').eq('usuario_id', user.id).single()
+    if (error) throw error
+    return data
+  },
+
+  async logout() {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
+  },
+}

@@ -15,7 +15,7 @@ export function BrandHeader() {
     <header
       className={`site-header${isScrolled ? ' scrolled' : ''}${isHidden ? ' hidden' : ''}`}
     >
-      <a className="brand-link" href="#inicio" aria-label="Volver al inicio">
+      <a className="brand-link" href="/" aria-label="Volver al inicio" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
         <img
           className="brand-logo"
           src="/ITSU.webp"
@@ -27,10 +27,10 @@ export function BrandHeader() {
 
       {/* Navegación interna con React Router (sin recarga de página) */}
       <nav className="header-actions" aria-label="Acciones principales">
-        <Link className="header-action outline" to="/iniciar-sesion">
-          Iniciar sesión
+        <Link className="header-action outline" to="/login">
+          Iniciar sesion
         </Link>
-        <Link className="header-action solid" to="/registro">
+        <Link className="header-action solid" to="/register">
           Registrarse
         </Link>
       </nav>

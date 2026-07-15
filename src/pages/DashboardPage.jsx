@@ -1,29 +1,10 @@
-/**
- * DashboardPage.jsx — Página principal del dashboard del estudiante.
- *
- * Al montar, llama a GET /api/dashboard para obtener los datos del estudiante.
- * Muestra tres estados posibles:
- * 1. Loading: indicador de carga mientras la petición está en curso.
- * 2. Error: mensaje de error si la petición falla.
- * 3. Éxito: muestra bienvenida, perfil del estudiante, estado de matrícula
- *    y materias inscritas.
- *
- * El estado de matrícula se colorea según su valor:
- * - "activo" → verde
- * - "suspendido" → rojo
- * - "egresado" → azul
- */
-
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { getDashboardData } from '../features/dashboard/services/dashboardService'
 import { EnrolledClasses } from '../features/dashboard/components/EnrolledClasses'
 
 export function DashboardPage() {
   const { user } = useAuth()
-  const navigate = useNavigate()
-
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -39,7 +20,7 @@ export function DashboardPage() {
     return (
       <div className="dashboard-page">
         <div className="page-content">
-          <p>Cargando dashboard…</p>
+          <p>Cargando dashboard...</p>
         </div>
       </div>
     )
@@ -55,22 +36,13 @@ export function DashboardPage() {
     )
   }
 
-  const estado = data.student.estado_matricula
+  const estado = data?.student?.estado_matricula
 
   return (
     <div className="dashboard-home">
       <section className="dashboard-section dashboard-welcome">
         <h3>Bienvenido, {user?.nombre || 'Estudiante'}</h3>
-        <p className="dashboard-welcome__subtitle">Instituto Tecnológico Sitio Uno</p>
-        <button
-          className="btn-entrar"
-          type="button"
-          onClick={() => {
-            document.querySelector('.profile-card')?.scrollIntoView({ behavior: 'smooth' })
-          }}
-        >
-          Entrar
-        </button>
+        <p className="dashboard-welcome__subtitle">Instituto Tecnologico Sitio Uno</p>
       </section>
 
       <section className="dashboard-section profile-card">
@@ -88,14 +60,16 @@ export function DashboardPage() {
         </div>
       </section>
 
-      <section className="dashboard-section">
-        <h3>Estado de matrícula</h3>
-        <p className={`matricula-badge matricula--${estado}`}>
-          {estado === 'activo' ? 'Activo' : estado === 'suspendido' ? 'Suspendido' : estado || 'Sin estado'}
-        </p>
-      </section>
+      {estado && (
+        <section className="dashboard-section">
+          <h3>Estado de matricula</h3>
+          <p className={`matricula-badge matricula--${estado}`}>
+            {estado === 'activo' ? 'Activo' : estado === 'suspendido' ? 'Suspendido' : estado || 'Sin estado'}
+          </p>
+        </section>
+      )}
 
-      <EnrolledClasses classes={data.classes} />
+      {data?.classes && <EnrolledClasses classes={data.classes} />}
     </div>
   )
 }

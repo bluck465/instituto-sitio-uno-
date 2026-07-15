@@ -12,14 +12,20 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
+// Cambia a false cuando quieras activar la proteccion de rutas
+const BYPASS_AUTH = true
+
 export function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth()
 
-  // Si no hay sesión activa, redirigir al inicio
+  // Si BYPASS_AUTH esta activo, saltar la verificacion
+  if (BYPASS_AUTH) {
+    return children
+  }
+
   if (!isAuthenticated) {
     return <Navigate to="/" replace />
   }
 
-  // Sesión válida: renderizar el contenido protegido
   return children
 }

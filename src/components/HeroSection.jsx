@@ -8,7 +8,7 @@ import { HeroPanel } from './HeroPanel'
 
 export function HeroSection({ content }) {
   return (
-    <section className="hero-section" id="inicio">
+    <section className="hero-section">
       <HeroCopy
         eyebrow={content.eyebrow}
         title={content.title}
