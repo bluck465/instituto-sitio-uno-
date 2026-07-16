@@ -1,0 +1,72 @@
+/* ── Encabezado de sección (SectionHeading) ───────────────────── */
+.section-heading {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.section-heading .eyebrow {
+  width: fit-content;
+}
+
+.section-heading h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+/* ── Value grid ───────────────────────────────────────────────── */
+.value-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.value-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 249, 253, 0.92));
+  box-shadow: 0 16px 40px rgba(14, 25, 47, 0.08);
+}
+
+[data-theme="dark"] .value-card {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.96), rgba(15, 23, 42, 0.92));
+}
+
+.value-card .value-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.value-card h3 {
+  margin: 0 0 10px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.35rem;
+  line-height: 1.12;
+}
+
+.value-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+/* ── Responsive: tablet (≤960px) ──────────────────────────────── */
+@media (max-width: 960px) {
+  .value-grid {
+    grid-template-columns: 1fr;
+  }
+}

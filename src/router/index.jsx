@@ -13,11 +13,12 @@ import { Suspense } from 'react'
 import { createBrowserRouter, Outlet } from 'react-router-dom'
 import { App } from '../App'
 import { routes } from './routes'
+import { LoadingScreen } from '../pantalla de carga/LoadingScreen'
 
-// Wrapper de Suspense: muestra fallback mientras se carga el componente lazy
+// Wrapper de Suspense: muestra spinner mientras se carga el componente lazy
 function SuspenseFallback() {
   return (
-    <Suspense fallback={<div className="page-content"><p>Cargando…</p></div>}>
+    <Suspense fallback={<LoadingScreen />}>
       <Outlet />
     </Suspense>
   )
