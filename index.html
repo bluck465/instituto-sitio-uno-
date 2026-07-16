@@ -9,9 +9,39 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Instituto Tecnológico Sitio Uno</title>
+    <style>
+      .initial-loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        gap: 16px;
+        font-family: system-ui, sans-serif;
+        color: #5f6b81;
+        font-size: 0.95rem;
+        background: #eef2f7;
+      }
+      .initial-spinner {
+        width: 56px;
+        height: 56px;
+        border: 11px #004dff double;
+        border-left-style: solid;
+        border-radius: 50%;
+        animation: spin 0.75s infinite linear;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="initial-loader">
+        <div class="initial-spinner"></div>
+        <p>Cargando…</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
