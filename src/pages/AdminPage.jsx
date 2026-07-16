@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 
 export function AdminPage() {
@@ -26,8 +27,24 @@ export function AdminPage() {
       </section>
 
       <section className="dashboard-section">
-        <h3>Gestion del sistema</h3>
-        <p>Proximamente podras gestionar usuarios, asignaturas y secciones aqui.</p>
+        <h3>Acceso rapido</h3>
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '12px' }}>
+          <Link to="/admin/estudiantes" className="header-action solid" style={{ textDecoration: 'none' }}>
+            Ver estudiantes
+          </Link>
+          <Link to="/admin/docentes" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Ver docentes
+          </Link>
+          <Link to="/admin/usuarios" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Gestionar usuarios
+          </Link>
+          <Link to="/admin/finanzas" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Ver pagos
+          </Link>
+          <Link to="/admin/materias" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Ver materias
+          </Link>
+        </div>
       </section>
     </div>
   )

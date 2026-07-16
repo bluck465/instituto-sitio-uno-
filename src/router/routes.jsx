@@ -26,6 +26,18 @@ const AdminPage = lazy(() =>
   import('../pages/AdminPage').then((m) => ({ default: m.AdminPage })),
 )
 
+const StudentsPage = lazy(() =>
+  import('../pages/admin/StudentsPage').then((m) => ({ default: m.StudentsPage })),
+)
+
+const TeachersPage = lazy(() =>
+  import('../pages/admin/TeachersPage').then((m) => ({ default: m.TeachersPage })),
+)
+
+const UsersPage = lazy(() =>
+  import('../pages/admin/UsersPage').then((m) => ({ default: m.UsersPage })),
+)
+
 const EstudianteProfilePage = lazy(() =>
   import('../pages/EstudianteProfilePage').then((m) => ({ default: m.EstudianteProfilePage })),
 )
@@ -104,6 +116,9 @@ export const routes = [
     ),
     children: [
       { index: true, element: <AdminPage /> },
+      { path: 'estudiantes', element: <StudentsPage /> },
+      { path: 'docentes', element: <TeachersPage /> },
+      { path: 'usuarios', element: <UsersPage /> },
     ],
   },
 
