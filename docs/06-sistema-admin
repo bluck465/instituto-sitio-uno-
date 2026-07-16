@@ -1,0 +1,96 @@
+[9:04 a.m., 16/7/2026] freylanpublicidad: 🏛️ Instituto Tecnológico Sitio Uno
+🚀 Sistema de Gestión Unificado (Control de Estudios)
+
+Bienvenido al repositorio central del Sistema de Gestión Unificado. Esta aplicación web está diseñada como una solución moderna, rápida y eficiente para digitalizar y automatizar los procesos administrativos y académicos de un instituto tecnológico en el mundo real mediante una arquitectura SPA (Single Page Application).
+🧭 Navegación Rápida de la Documentación
+
+Usa estos botones interactivos para explorar las diferentes dimensiones técnicas y metodológicas del proyecto:
+SOLID y TDD Stack Tecnológico Módulos
+🎯 Objetivo del Proyecto
+
+El objetivo principal es reemplazar los sistemas obsoletos o procesos manuales en papel por una SPA (Single Page Application) ultra liger…
+[9:19 a.m., 16/7/2026] freylanpublicidad: Administrador del Sistema
+Objetivo
+El Administrador es el usuario con mayor nivel de acceso. Es responsable de configurar el sistema, administrar los usuarios y supervisar todas las operaciones académicas y administrativas.
+Módulo 1. Dashboard
+Permisos:
+Ver estadísticas generales.
+Ver estudiantes inscritos.
+Ver docentes activos.
+Ver materias.
+Ver pagos.
+Ver actividad reciente.
+Ver notificaciones.
+Módulo 2. Gestión de Usuarios
+Permisos:
+Crear usuarios.
+Editar usuarios.
+Desactivar usuarios.
+Restablecer contraseñas.
+Asignar roles.
+Cambiar permisos.
+Módulo 3. Gestión Académica
+Permisos:
+Crear carreras.
+Crear materias.
+Crear pensum.
+Abrir períodos académicos.
+Crear secciones.
+Asignar docentes.
+Configurar horarios.
+Configurar aulas.
+Módulo 4. Gestión de Estudiantes
+Permisos:
+Registrar estudiantes.
+Editar expedientes.
+Consultar historial académico.
+Aprobar inscripciones.
+Cambiar estado del estudiante (Activo, Suspendido, Graduado, Retirado).
+Módulo 5. Gestión de Docentes
+Permisos:
+Registrar docentes.
+Editar información.
+Asignar materias.
+Cambiar carga académica.
+Consultar horarios.
+Módulo 6. Calificaciones
+Permisos:
+Consultar notas.
+Autorizar modificaciones de notas.
+Cerrar actas.
+Reabrir actas (solo con autorización).
+Módulo 7. Finanzas
+Permisos:
+Registrar pagos.
+Ver deudas.
+Aprobar solvencias.
+Emitir facturas.
+Generar estados de cuenta.
+Módulo 8. Reportes
+Permisos:
+Reportes de estudiantes.
+Reportes de docentes.
+Reportes académicos.
+Reportes financieros.
+Exportar PDF y Excel.
+Módulo 9. Auditoría
+Permisos:
+Ver quién inició sesión.
+Ver cambios realizados.
+Ver historial de modificaciones.
+Ver registros eliminados.
+Consultar errores del sistema.
+Módulo 10. Configuración
+Permisos:
+Configurar datos del instituto.
+Gestionar períodos académicos.
+Configurar parámetros del sistema.
+Administrar respaldos.
+Configurar correos y notificaciones.
+Mi recomendación
+No tengas un solo tipo de administrador. Define distintos niveles de acceso:
+Super Administrador: acceso total al sistema y a la configuración.
+Administrador Académico: gestiona estudiantes, docentes, materias, secciones y calificaciones, pero no la configuración global.
+Administrador Financiero: administra pagos, matrículas, solvencias y reportes financieros.
+Administrador de Soporte: gestiona usuarios, restablece contraseñas y consulta auditorías, sin acceso a información financiera ni a la configuración crítica.
+Con este esquema el sistema será mucho más seguro y escalable, porque cada administrador verá únicamente los módulos necesarios para su función.
