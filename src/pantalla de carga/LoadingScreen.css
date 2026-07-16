@@ -1,0 +1,26 @@
+.spinner {
+  width: 56px;
+  height: 56px;
+  border: 11px #004dff double;
+  border-left-style: solid;
+  border-radius: 50%;
+  animation: spinner-aib1d7 0.75s infinite linear;
+}
+
+@keyframes spinner-aib1d7 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 16px;
+  color: #5f6b81;
+  font-size: 0.95rem;
+  background: #eef2f7;
+}
