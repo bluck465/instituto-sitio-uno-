@@ -1,0 +1,92 @@
+/* ── Fuente base ──────────────────────────────────────────────── */
+@font-face {
+  font-family: 'AptosFallback';
+  src: local('Aptos'), local('Segoe UI'), local('Helvetica Neue');
+}
+
+/* ── Variables CSS — Light theme (default) ────────────────────── */
+:root {
+  --bg: #eef2f7;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: #ffffff;
+  --surface-soft: rgba(16, 34, 65, 0.06);
+  --text: #11213d;
+  --muted: #5f6b81;
+  --border: rgba(17, 33, 61, 0.1);
+  --accent: #1e50d8;
+  --accent-strong: #1436a6;
+  --accent-soft: rgba(30, 80, 216, 0.12);
+  --glow: rgba(117, 79, 255, 0.28);
+  --shadow: 0 24px 80px rgba(14, 25, 47, 0.12);
+
+  font-family: 'AptosFallback', 'Trebuchet MS', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Variables CSS — Dark theme ───────────────────────────────── */
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --surface: rgba(17, 24, 39, 0.88);
+  --surface-strong: #111827;
+  --surface-soft: rgba(255, 255, 255, 0.06);
+  --text: #f0f4ff;
+  --muted: #94a3b8;
+  --border: rgba(255, 255, 255, 0.1);
+  --accent: #60a5fa;
+  --accent-strong: #93bbfd;
+  --accent-soft: rgba(96, 165, 250, 0.15);
+  --glow: rgba(96, 165, 250, 0.25);
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Reset y estilos base ─────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top left, rgba(30, 80, 216, 0.12), transparent 30%),
+    radial-gradient(circle at top right, rgba(117, 79, 255, 0.12), transparent 26%),
+    linear-gradient(180deg, #f6f8fc 0%, #eef2f7 100%);
+  color: var(--text);
+}
+
+[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at top left, rgba(96, 165, 250, 0.08), transparent 30%),
+    radial-gradient(circle at top right, rgba(139, 92, 246, 0.08), transparent 26%),
+    linear-gradient(180deg, #0f172a 0%, #0b1120 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  min-height: 100vh;
+}

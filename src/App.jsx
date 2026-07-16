@@ -6,12 +6,13 @@
  */
 
 import { Outlet } from 'react-router-dom'
+import { ThemeToggle } from './components/ThemeToggle'
 
 export function App() {
   return (
     <div className="app-shell">
-      {/* Outlet renderiza dinámicamente el componente de la ruta activa */}
       <Outlet />
+      <ThemeToggle />
     </div>
   )
 }

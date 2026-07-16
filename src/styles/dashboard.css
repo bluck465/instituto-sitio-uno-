@@ -1,0 +1,299 @@
+/* ── Dashboard: página y layout principal ─────────────────────── */
+.dashboard-page {
+  padding-bottom: 28px;
+}
+
+.dashboard-page__header {
+  margin-bottom: 18px;
+}
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 18px;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+.dashboard-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-user {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+[data-theme="dark"] .sidebar-user {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.sidebar-user__name {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin: 0 0 4px;
+}
+
+.sidebar-user__cedula,
+.sidebar-user__carrera,
+.sidebar-user__email {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.sidebar-user__role {
+  color: var(--accent-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 6px 0 0;
+}
+
+.dashboard-sidebar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-sidebar nav a {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.dashboard-sidebar nav a:hover {
+  background: var(--accent-soft);
+}
+
+.sidebar-logout {
+  margin-top: auto;
+  border: 1px solid var(--border);
+  background: none;
+  border-radius: 14px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--muted);
+}
+
+.sidebar-logout:hover {
+  color: #b91c1c;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+/* ── Tarjetas ─────────────────────────────────────────────────── */
+.sidebar-card,
+.list-card,
+.summary-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 18px;
+}
+
+[data-theme="dark"] .sidebar-card,
+[data-theme="dark"] .list-card,
+[data-theme="dark"] .summary-card {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.summary-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.summary-card strong {
+  font-size: 1.8rem;
+}
+
+.list-card ul,
+.sidebar-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+/* ── Summary cards (dashboard) ────────────────────────────────── */
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.summary-card__value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.summary-card__label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ── Estado de matrícula ──────────────────────────────────────── */
+.matricula-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.matricula--activo {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.matricula--suspendido {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.matricula--egresado {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* ── Dashboard sections ───────────────────────────────────────── */
+.dashboard-section {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 24px;
+}
+
+[data-theme="dark"] .dashboard-section {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.dashboard-section h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ── Classes list ─────────────────────────────────────────────── */
+.dashboard-classes {
+  margin-top: 14px;
+}
+
+.classes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.class-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 150px 120px 60px;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .class-card {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.class-card__code {
+  font-weight: 800;
+  font-size: 0.8rem;
+  color: var(--accent-strong);
+}
+
+.class-card__name {
+  font-weight: 600;
+}
+
+.class-card__profesor,
+.class-card__schedule,
+.class-card__aula {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.class-card__aula {
+  text-align: right;
+}
+
+/* ── Welcome section ──────────────────────────────────────────── */
+.dashboard-welcome {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.dashboard-welcome h3 {
+  font-size: 1.4rem;
+  margin: 0 0 6px;
+}
+
+.dashboard-welcome__subtitle {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 20px;
+}
+
+.btn-entrar {
+  background: var(--accent-strong);
+  color: #fff;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.btn-entrar:hover {
+  opacity: 0.85;
+}
+
+/* ── Responsive: tablet (≤960px) ──────────────────────────────── */
+@media (max-width: 960px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Responsive: móvil (≤720px) ───────────────────────────────── */
+@media (max-width: 720px) {
+  .class-card {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
