@@ -1,10 +1,6 @@
 # Functional Specification — ITSU
 
-> **Version:** 1.0  
-> **Fecha:** Julio 2026  
-> **Estado:** Fase 1 completada, Fase 2 en planificacion
 
----
 
 ## 1. Propósito del Documento
 

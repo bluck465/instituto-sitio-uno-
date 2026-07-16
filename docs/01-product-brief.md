@@ -8,7 +8,7 @@
 
 ## 1. Resumen Ejecutivo
 
-**ITSU** (Instituto Tecnologico Sitio Uno) es una aplicación web de tipo SPA (Single Page Application) diseñada para digitalizar los procesos administrativos y académicos de un instituto tecnológico. El sistema opera bajo un modelo de **tres portales** que atienden a los diferentes actores de la comunidad educativa: estudiantes, docentes y personal administrativo.
+**ITSU** (Instituto Tecnologico Sitio Uno) es una aplicación web de tipo SPA (Single Page Application) diseñada para digitalizar los procesos administrativos y académicos de un instituto tecnológico. El sistema opera bajo un modelo de **tres portales** que atienden a los diferentes actores de la comunidad educativa: estudiantes, docentes y personal administrativo (junto con otras futures y pages para automatizar el proceso de las clases dentro del intituto).
 
 El producto transforma la presencia digital del instituto desde un sitio web estático hacia una plataforma interactiva con autenticación segura, gestión de datos en tiempo real y una arquitectura modular que permite escalabilidad sostenida.
 
@@ -52,7 +52,7 @@ ITSU propone una **arquitectura de tres portales** que cubre el ciclo completo d
 - Estado de matrícula en tiempo real
 - Vista de materias inscritas y horarios
 - **Biblioteca digital** — Acceso a materiales de estudio organizados por materia (PDFs, documentos, enlaces, videos)
-- Estado de cuenta y pagos
+- Estado de cuenta y pagos para tener al dia los pago-movil del cel junto con el admin para llevar los datos
 
 ### Portal del Docente
 
@@ -300,13 +300,6 @@ Descubrimiento → Consideración → Inscripción → Matrícula → Formación
 | **MVP** | Minimum Viable Product — producto mínimo viable |
 | **KPI** | Key Performance Indicator — indicador clave de desempeño |
 | **CRUD** | Create, Read, Update, Delete — operaciones básicas de datos |
-
-### Referencias
-
-- [Supabase Documentation](https://supabase.com/docs)
-- [React Documentation](https://react.dev)
-- [Vite Documentation](https://vitejs.dev)
-- [JWT RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519)
 
 ---
 

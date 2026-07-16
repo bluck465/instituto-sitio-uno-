@@ -1,19 +1,5 @@
 # Technical Specification — ITSU
 
-> **Version:** 1.0  
-> **Fecha:** Julio 2026  
-> **Estado:** Fase 1 completada, Fase 2 en planificacion
-
----
-
-## 1. Propósito del Documento
-
-Este documento define **cómo se implementa** el sistema ITSU a nivel técnico. Describe la arquitectura, la estructura de datos, los endpoints del API, los modelos de componentes, y las decisiones de diseño del código. Es la referencia que resuelve la pregunta *"¿cómo funciona internamente?"*.
-
-Para la especificación funcional (qué hace el producto), consultar `03-functional-spec.md`.
-
----
-
 ## 2. Arquitectura General
 
 ### 2.1 Diagrama de componentes
@@ -741,36 +727,6 @@ usuarios ──1:N──> materiales (como docente)
 | 422 | Campos invalidos | `{ error: { campo: ["mensaje"] } }` |
 | 500 | Error del servidor | `{ error: "Error del servidor" }` |
 
-### 11.2 Dashboard
-
-| Metodo | Endpoint | Headers | Response | Status |
-|:---|:---|:---|:---|:---|
-| GET | `/api/dashboard` | Authorization: Bearer {token} | `{ student: {...}, classes: [...] }` | 200 |
-
-**Estructura de `student`:**
-```json
-{
-  "id": "uuid",
-  "cedula_identidad": "12345678",
-  "primer_nombre": "Juan",
-  "primer_apellido": "Perez",
-  "email": "juan@email.com",
-  "estado_matricula": "activo"
-}
-```
-
-**Estructura de `classes`:**
-```json
-[
-  {
-    "codigo": "MAT101",
-    "nombre": "Matematicas I",
-    "profesor": "Ing. Carlos Perez",
-    "horario": "Lun-Vie 8:00-10:00",
-    "aula": "A-301"
-  }
-]
-```
 
 ### 11.3 Biblioteca Digital (Fase 2)
 
@@ -779,14 +735,6 @@ usuarios ──1:N──> materiales (como docente)
 | GET | `/api/materias/:seccionId/materiales` | — | `[ { material }, ... ]` | 200 |
 | POST | `/api/materias/:seccionId/materiales` | FormData (archivo + metadata) | `{ material }` | 201 |
 | DELETE | `/api/materiales/:id` | — | `{ message }` | 200 |
-
-### 11.4 Variables de Entorno
-
-| Variable | Descripcion | Ejemplo |
-|:---|:---|:---|
-| `VITE_API_BASE_URL` | URL base del backend | `http://localhost:3000` |
-| `SUPABASE_URL` | URL del proyecto Supabase | `https://xxx.supabase.co` |
-| `SUPABASE_ANON_KEY` | Anon key de Supabase | `eyJhbG...` |
 
 ---
 
@@ -823,93 +771,6 @@ usuarios ──1:N──> materiales (como docente)
 | CORS | Configurado en el backend para aceptar solo el frontend |
 | Variables sensibles | `.env` en `.gitignore`, nunca en el repositorio |
 
----
 
-## 13. Pipeline de Build
-
-### 13.1 Scripts de package.json
-
-| Script | Comando | Descripcion |
-|:---|:---|:---|
-| `dev` | `vite` | Inicia el dev server en puerto 5173 |
-| `build` | `vite build` | Genera el build de produccion en `/dist` |
-| `preview` | `vite preview` | Vista previa del build de produccion |
-| `lint` | `eslint .` | Verifica errores de estilo del codigo |
-
-### 13.2 Build de produccion
-
-El build genera archivos estaticos en `/dist` listos para desplegar:
-
-```
-dist/
-├── index.html
-├── favicon.svg
-├── hero-visual.svg
-├── ITSU.webp
-└── assets/
-    ├── index-[hash].js      # Bundle principal
-    ├── index-[hash].css     # Estilos
-    └── vendor-[hash].js     # Dependencias (react, react-router)
-```
-
-### 13.3 Optimizaciones de Vite
-
-| Optimizacion | Descripcion |
-|:---|:---|
-| Code splitting | Cada pagina se carga bajo demanda via React.lazy |
-| Tree shaking | Elimina codigo no utilizado del bundle |
-| Minificacion | JS y CSS minificados en produccion |
-| Hash en filenames | Cache busting para actualizaciones seguras |
-| Alias `@` | Resuelve imports desde `src/` sin paths relativos |
-
----
-
-## 14. Dependencias
-
-### 14.1 Dependencias de produccion
-
-| Paquete | Version | Funcion |
-|:---|:---|:---|
-| `react` | 19.x | Libreria de UI |
-| `react-dom` | 19.x | Renderer para browser |
-| `react-router-dom` | 7.x | Enrutamiento SPA |
-
-### 14.2 Dependencias de desarrollo
-
-| Paquete | Version | Funcion |
-|:---|:---|:---|
-| `vite` | 8.x | Bundler y dev server |
-| `@vitejs/plugin-react` | — | Plugin de React para Vite |
-| `eslint` | — | Linter de JavaScript |
-| `eslint-plugin-react-hooks` | — | Reglas de hooks para ESLint |
-| `@eslint/js` | — | Reglas base de ESLint |
-
----
-
-## 15. Guia de Extension (Fase 2)
-
-### 15.1 Agregar una nueva ruta
-
-1. Crear el componente lazy en `src/pages/NuevaPagina.jsx`
-2. Agregar la ruta en `src/router/routes.jsx`
-3. Si requiere auth: envolver con `<ProtectedRoute>`
-
-### 15.2 Agregar un nuevo feature module
-
-1. Crear carpeta `src/features/nuevo-modulo/`
-2. Agregar subcarpetas `components/` y `services/`
-3. Crear los servicios HTTP en `services/`
-4. Crear los componentes en `components/`
-5. Exportar desde un barrel `index.js` si es necesario
-
-### 15.3 Conectar con Supabase
-
-1. Instalar `@supabase/supabase-js`
-2. Crear cliente Supabase en `src/services/supabase.js`
-3. Configurar variables de entorno en `.env`
-4. Reemplazar llamadas mock por llamadas reales al SDK
-5. Configurar RLS en las tablas de Supabase
-
----
 
 *Documento generado como parte de la planificacion del proyecto ITSU.*
