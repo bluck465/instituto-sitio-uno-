@@ -21,7 +21,7 @@ export function RegisterPage({ onSwitchToLogin }) {
         <span className="eyebrow">Acceso</span>
         <h2>Registrarse</h2>
         <p className="auth-page__text">
-          Crea tu cuenta con correo, contrasena y rol.
+          Crea tu cuenta con correo, contraseña y rol y luego verifica tu correo electrónico.
         </p>
       </header>
 

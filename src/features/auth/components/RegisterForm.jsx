@@ -9,10 +9,12 @@ export function RegisterForm() {
   const { register } = useAuth()
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
+    setSuccess(null)
     setLoading(true)
 
     try {
@@ -23,13 +25,21 @@ export function RegisterForm() {
       const response = await register(payload)
 
       const rol = response.user.rol || 'estudiante'
-      if (rol === 'profesor') {
-        navigate('/profile/docente')
-      } else if (rol === 'administrador') {
-        navigate('/profile/administrador')
-      } else {
-        navigate('/profile/estudiante')
-      }
+      const rolLabel = rol === 'profesor' ? 'Profesor'
+        : rol === 'administrador' ? 'Administrador'
+        : 'Estudiante'
+
+      setSuccess(`Cuenta creada como ${rolLabel}. Redirigiendo...`)
+
+      setTimeout(() => {
+        if (rol === 'profesor') {
+          navigate('/profile/docente')
+        } else if (rol === 'administrador') {
+          navigate('/profile/administrador')
+        } else {
+          navigate('/profile/estudiante')
+        }
+      }, 1500)
     } catch (err) {
       const parsed = parseServerError(err)
       setError(parsed.friendly || err.message)
@@ -41,6 +51,7 @@ export function RegisterForm() {
   return (
     <form className="auth-form auth-form--register" onSubmit={handleSubmit}>
       <FormError error={error} />
+      {success && <div className="auth-success">{success}</div>}
 
       <section className="auth-group">
         <h3>Crear cuenta</h3>
@@ -70,8 +81,8 @@ export function RegisterForm() {
         </label>
       </section>
 
-      <button className="auth-button" type="submit" disabled={loading}>
-        {loading ? 'Registrando...' : 'Registrarse'}
+      <button className="auth-button" type="submit" disabled={loading || !!success}>
+        {loading ? 'Registrando...' : success ? 'Redirigiendo...' : 'Registrarse'}
       </button>
     </form>
   )

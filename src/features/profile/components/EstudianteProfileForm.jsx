@@ -35,7 +35,7 @@ export function EstudianteProfileForm() {
 
       <label className="field">
         <span>Cedula de identidad *</span>
-        <input type="text" name="cedula_identidad" placeholder="Ej: V-12345678" required />
+        <input type="text" name="cedula_identidad" placeholder="Tu cedula" required />
       </label>
 
       <label className="field">
@@ -44,18 +44,8 @@ export function EstudianteProfileForm() {
       </label>
 
       <label className="field">
-        <span>Segundo nombre</span>
-        <input type="text" name="segundo_nombre" placeholder="Tu segundo nombre" />
-      </label>
-
-      <label className="field">
         <span>Primer apellido *</span>
         <input type="text" name="primer_apellido" placeholder="Tu primer apellido" required />
-      </label>
-
-      <label className="field">
-        <span>Segundo apellido</span>
-        <input type="text" name="segundo_apellido" placeholder="Tu segundo apellido" />
       </label>
 
       <label className="field">

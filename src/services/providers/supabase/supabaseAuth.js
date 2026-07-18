@@ -71,7 +71,7 @@ export const supabaseAuth = {
       : rol === 'profesor' ? 'profesores'
       : 'administradores'
 
-    const { data, error } = await supabase.from(table).select('*').eq('usuario_id', user.id).single()
+    const { data, error } = await supabase.from(table).select('*').eq('usuario_id', user.id).maybeSingle()
     if (error) throw error
     return data
   },

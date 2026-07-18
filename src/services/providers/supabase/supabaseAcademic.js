@@ -43,8 +43,8 @@ export const supabaseAcademic = {
     const { data: estudiante, error: estError } = await supabase
       .from('estudiantes')
       .select('*')
-      .eq('id', user.id)
-      .single()
+      .eq('usuario_id', user.id)
+      .maybeSingle()
 
     if (estError) throw estError
 

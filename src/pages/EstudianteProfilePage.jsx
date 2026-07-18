@@ -1,11 +1,13 @@
-import React from 'react'
-import StudentProfile from '../components/StudentProfile'
+import { ProfileLayout } from '../features/profile/components/ProfileLayout'
+import { EstudianteProfileForm } from '../features/profile/components/EstudianteProfileForm'
 
 export function EstudianteProfilePage() {
   return (
-    <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh' }}>
-      {/* Llamada directa al componente StudentProfile */}
-      <StudentProfile />
-    </div>
+    <ProfileLayout
+      title="Completa tu perfil"
+      subtitle="Necesitamos tus datos personales para completar tu registro como estudiante."
+    >
+      <EstudianteProfileForm />
+    </ProfileLayout>
   )
 }
