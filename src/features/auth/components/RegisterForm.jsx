@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { parseServerError } from '../../../services/errorHandler'
 import { FormError } from './FormError'
+import { storage } from '../../../services/storage'
 
 export function RegisterForm() {
   const navigate = useNavigate()
@@ -17,11 +18,11 @@ export function RegisterForm() {
     setSuccess(null)
     setLoading(true)
 
-    try {
-      const form = new FormData(e.target)
-      const payload = Object.fromEntries(form)
-      payload.activo = form.get('activo') === 'on'
+    const form = new FormData(e.target)
+    const payload = Object.fromEntries(form)
+    payload.activo = form.get('activo') === 'on'
 
+    try {
       const response = await register(payload)
 
       const rol = response.user.rol || 'estudiante'
@@ -41,6 +42,16 @@ export function RegisterForm() {
         }
       }, 1500)
     } catch (err) {
+      if (err.message?.includes('Email not confirmed')) {
+        storage.set('pendingVerificationEmail', payload.email)
+
+        const rol = payload.rol || 'estudiante'
+        if (rol === 'profesor') navigate('/profile/docente')
+        else if (rol === 'administrador') navigate('/profile/administrador')
+        else navigate('/profile/estudiante')
+        return
+      }
+
       const parsed = parseServerError(err)
       setError(parsed.friendly || err.message)
     } finally {

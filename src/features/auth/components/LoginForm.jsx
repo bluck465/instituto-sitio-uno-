@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { parseServerError } from '../../../services/errorHandler'
 import { FormError } from './FormError'
+import { supabase } from '../../../lib/supabaseClient'
+import { storage } from '../../../services/storage'
 
 export function LoginForm() {
   const { login } = useAuth()
@@ -15,8 +17,9 @@ export function LoginForm() {
     setError(null)
     setLoading(true)
 
+    const form = new FormData(e.target)
+
     try {
-      const form = new FormData(e.target)
       const response = await login(form.get('email'), form.get('password'))
 
       const rol = response.user?.rol || 'estudiante'
@@ -28,6 +31,23 @@ export function LoginForm() {
         navigate('/dashboard')
       }
     } catch (err) {
+      if (err.message?.includes('Email not confirmed')) {
+        const email = form.get('email')
+        storage.set('pendingVerificationEmail', email)
+
+        const { data } = await supabase
+          .from('usuarios')
+          .select('rol')
+          .eq('email', email)
+          .maybeSingle()
+
+        const rol = data?.rol || 'estudiante'
+        if (rol === 'profesor') navigate('/profile/docente')
+        else if (rol === 'administrador') navigate('/profile/administrador')
+        else navigate('/profile/estudiante')
+        return
+      }
+
       const parsed = parseServerError(err)
       setError(parsed.friendly || err.message)
     } finally {

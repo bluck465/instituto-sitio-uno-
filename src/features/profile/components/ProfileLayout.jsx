@@ -1,6 +1,9 @@
+import { EmailVerificationModal } from '../../../shared/components/EmailVerificationModal'
+
 export function ProfileLayout({ title, subtitle, children }) {
   return (
     <div className="auth-page">
+      <EmailVerificationModal />
       <header className="auth-page__header">
         <span className="eyebrow">Perfil</span>
         <h2>{title}</h2>
