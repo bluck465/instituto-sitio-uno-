@@ -203,27 +203,52 @@
 }
 
 /* ── Botones auth ─────────────────────────────────────────────── */
-.auth-button,
-.auth-switch {
+.auth-button {
   min-height: 48px;
   border-radius: 14px;
   font-weight: 800;
-}
-
-.auth-button {
   border: 0;
   background: linear-gradient(135deg, #2f6bf0 0%, #1843b7 100%);
   color: #fff;
 }
 
-.auth-switch {
-  border: 1px solid var(--border);
-  background: #fff;
-  color: var(--text);
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+  display: grid;
+  gap: 12px;
 }
 
-[data-theme="dark"] .auth-switch {
-  background: #1e293b;
+.toggle-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+.toggle-link {
+  color: #2f6bf0;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.toggle-link:hover {
+  text-decoration: underline;
+}
+
+.terms-text {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.legal-link {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-link:hover {
+  opacity: 0.8;
 }
 
 /* ── Responsive: móvil (≤720px) ───────────────────────────────── */

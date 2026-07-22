@@ -1,37 +1,20 @@
 import { createContext, useContext, useState, useCallback } from 'react'
-import { loginUser as apiLogin, registerUser as apiRegister, saveProfileUser, getProfileUser } from '../features/auth/services/authService'
+import {
+  loginUser as apiLogin,
+  registerUser as apiRegister,
+  saveProfileUser,
+  getProfileUser,
+  logoutUser
+} from '../features/auth/services/authService'
+import { storage } from '../services/storage'
 
-const TOKEN_KEY = 'itsu_token'
-const USER_KEY = 'itsu_user'
-
-function getToken() {
-  return localStorage.getItem(TOKEN_KEY)
-}
-
-function setToken(token) {
-  localStorage.setItem(TOKEN_KEY, token)
-}
-
-function removeToken() {
-  localStorage.removeItem(TOKEN_KEY)
-}
-
-function getUser() {
-  try {
-    const raw = localStorage.getItem(USER_KEY)
-    return raw ? JSON.parse(raw) : null
-  } catch {
-    return null
-  }
-}
-
-function setUser(user) {
-  localStorage.setItem(USER_KEY, JSON.stringify(user))
-}
-
-function removeUser() {
-  localStorage.removeItem(USER_KEY)
-}
+// ── Estado inicial desde el servicio de storage ──
+function getToken() { return storage.get('token') }
+function setToken(token) { storage.set('token', token) }
+function removeToken() { storage.remove('token') }
+function getUser() { return storage.getJson('user') }
+function setUser(user) { storage.setJson('user', user) }
+function removeUser() { storage.remove('user') }
 
 const AuthContext = createContext(null)
 
@@ -66,15 +49,24 @@ export function AuthProvider({ children }) {
     return getProfileUser(rol)
   }, [])
 
-  const logout = useCallback(() => {
-    removeToken()
+  const logout = useCallback(async () => {
+    try {
+      await logoutUser()          // cierra sesión en Supabase
+    } catch {
+      // si falla la red, igual limpiamos local
+      // la sesión en Supabase expira sola con el TTL del JWT
+    }
+    removeToken()                 // limpieza local SIEMPRE se ejecuta
     removeUser()
     setTokenState(null)
     setUserState(null)
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, token, isAuthenticated, login, register, saveProfile, getProfile, logout }}>
+    <AuthContext.Provider value={{
+      user, token, isAuthenticated,
+      login, register, saveProfile, getProfile, logout
+    }}>
       {children}
     </AuthContext.Provider>
   )

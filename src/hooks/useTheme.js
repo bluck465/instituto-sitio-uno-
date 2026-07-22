@@ -1,13 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
+import { storage } from '../services/storage'
 
-const THEME_KEY = 'itsu_theme'
+const THEME_KEY = 'theme'
 
 function getStoredTheme() {
-  try {
-    return localStorage.getItem(THEME_KEY) || 'light'
-  } catch {
-    return 'light'
-  }
+  return storage.get(THEME_KEY) || 'light'
 }
 
 export function useTheme() {
@@ -15,11 +12,7 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
-    try {
-      localStorage.setItem(THEME_KEY, theme)
-    } catch (_) {
-      /* storage not available */
-    }
+    storage.set(THEME_KEY, theme)
   }, [theme])
 
   const toggleTheme = useCallback(() => {

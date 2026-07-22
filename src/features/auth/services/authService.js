@@ -15,3 +15,7 @@ export async function saveProfileUser(rol, profileData) {
 export async function getProfileUser(rol) {
   return db.auth.getProfile(rol)
 }
+
+export async function logoutUser() {
+  return db.auth.logout()
+}

@@ -28,10 +28,20 @@ export function RegisterPage({ onSwitchToLogin }) {
       {/* Formulario de registro (maneja su propio estado y envío) */}
       <RegisterForm />
 
-      {/* Botón para alternar entre registro y login */}
-      <button type="button" className="auth-switch" onClick={onSwitchToLogin}>
-        Ir a iniciar sesión
-      </button>
+      <div className="auth-footer">
+        <p className="toggle-text">
+          ¿Ya tienes cuenta?{' '}
+          <a href="#" className="toggle-link" onClick={(e) => { e.preventDefault(); onSwitchToLogin(); }}>
+            Iniciar sesión
+          </a>
+        </p>
+        <p className="terms-text">
+          Al continuar, aceptas los{' '}
+          <a href="/terms" className="legal-link">Términos de Servicio</a> y la{' '}
+          <a href="/privacy" className="legal-link">Política de Privacidad</a>,{' '}
+          y recibir correos periódicos con actualizaciones.
+        </p>
+      </div>
     </div>
   )
 }

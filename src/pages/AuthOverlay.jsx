@@ -51,7 +51,7 @@ export function AuthOverlay({ mode }) {
           {mode === 'login' ? (
             <LoginPage onSwitchToRegister={() => navigate('/register')} />
           ) : (
-            <RegisterPage onSwitchToLogin={() => navigate('/')} />
+            <RegisterPage onSwitchToLogin={() => navigate('/login')} />
           )}
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthContext'
 import { parseServerError } from '../../../services/errorHandler'
 import { FormError } from '../../auth/components/FormError'
+import { PhoneField } from '../../../shared/components/PhoneField'
 
 export function DocenteProfileForm() {
   const navigate = useNavigate()
@@ -43,10 +44,7 @@ export function DocenteProfileForm() {
         <input type="text" name="primer_apellido" placeholder="Tu primer apellido" required />
       </label>
 
-      <label className="field">
-        <span>Telefono</span>
-        <input type="tel" name="telefono" placeholder="Tu telefono" />
-      </label>
+      <PhoneField name="telefono" defaultCountry="+58" />
 
       <button className="auth-button" type="submit" disabled={loading}>
         {loading ? 'Guardando...' : 'Guardar perfil'}

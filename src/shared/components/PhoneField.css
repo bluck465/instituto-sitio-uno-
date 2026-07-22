@@ -1,0 +1,191 @@
+/* ── PhoneField con selector de código de país ─────────────────── */
+.phone-field .phone-field__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Botón del código de país ──────────────────────────────────── */
+.phone-field__code-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 14px 0 0 14px;
+  border-right: none;
+  background: rgba(248, 250, 255, 0.92);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 0.95rem;
+  outline: none;
+  position: relative;
+  z-index: 0;
+}
+
+[data-theme="dark"] .phone-field__code-btn {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.phone-field__flag {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.phone-field__code-text {
+  font-weight: 700;
+}
+
+.phone-field__arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+  color: var(--muted);
+}
+
+.phone-field__arrow--up {
+  transform: rotate(180deg);
+}
+
+/* ── Input del número telefónico ────────────────────────────────── */
+.phone-field__input {
+  flex: 1;
+  min-height: 48px;
+  padding-left: 16px;
+  border: 1px solid var(--border);
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-radius: 0 14px 14px 0;
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  margin-left: -12px;
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] .phone-field__input {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Focus unificado en el wrapper ──────────────────────────────── */
+.phone-field__wrapper:focus-within {
+  border-radius: 14px;
+}
+
+.phone-field__wrapper:focus-within .phone-field__code-btn {
+  border-color: #2f6bf0;
+  box-shadow: inset 1px 0 0 #2f6bf0;
+}
+
+.phone-field__wrapper:focus-within .phone-field__input {
+  border-color: #2f6bf0;
+  box-shadow: 0 0 0 1px #2f6bf0;
+}
+
+[data-theme="dark"] .phone-field__wrapper:focus-within .phone-field__code-btn {
+  border-color: #5090ff;
+  box-shadow: inset 1px 0 0 #5090ff;
+}
+
+[data-theme="dark"] .phone-field__wrapper:focus-within .phone-field__input {
+  border-color: #5090ff;
+  box-shadow: 0 0 0 1px #5090ff;
+}
+
+/* ── Dropdown ──────────────────────────────────────────────────── */
+.phone-field__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 70;
+  width: 320px;
+  max-height: 280px;
+  margin-top: 6px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(8, 15, 28, 0.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-theme="dark"] .phone-field__dropdown {
+  background: #1e293b;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.phone-field__search {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.phone-field__search::placeholder {
+  color: var(--muted);
+}
+
+.phone-field__list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.phone-field__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.phone-field__option:hover {
+  background: rgba(47, 107, 240, 0.08);
+}
+
+.phone-field__option--active {
+  background: rgba(47, 107, 240, 0.12);
+  font-weight: 700;
+}
+
+.phone-field__option-label {
+  flex: 1;
+}
+
+.phone-field__option-code {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.phone-field__no-results {
+  padding: 14px 12px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .phone-field__dropdown {
+    width: min(calc(100vw - 32px), 320px);
+  }
+}

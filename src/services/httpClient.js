@@ -1,29 +1,11 @@
-/**
- * httpClient.js — Cliente HTTP genérico para consumir el API REST.
- *
- * Proporciona una capa de abstracción sobre fetch() que:
- * - Lee la URL base desde la variable de entorno VITE_API_BASE_URL.
- * - Adjunta automáticamente el token JWT de Authorization si existe.
- * - Retorna JSON directamente (parsea la respuesta).
- * - Lanza ApiError con status y body cuando la respuesta no es OK.
- *
- * Expone cuatro métodos: get, post, put, delete.
- * Todos los payloads se envían como application/json.
- */
+import { storage } from './storage'
 
-// URL base del API backend, configurada en .env como VITE_API_BASE_URL
+/** httpClient.js — Cliente HTTP genérico para consumir el API REST. */
+
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
-/**
- * getToken() — Lee el token JWT de localStorage.
- * Retorna null si no existe o si hay error al acceder a localStorage.
- */
 function getToken() {
-  try {
-    return localStorage.getItem('itsu_token')
-  } catch {
-    return null
-  }
+  return storage.get('token')
 }
 
 /**

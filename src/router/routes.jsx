@@ -27,15 +27,15 @@ const AdminPage = lazy(() =>
 )
 
 const StudentsPage = lazy(() =>
-  import('../pages/admin/StudentsPage').then((m) => ({ default: m.StudentsPage })),
+  import('../pages/admin_pages/StudentsPage').then((m) => ({ default: m.StudentsPage })),
 )
 
 const TeachersPage = lazy(() =>
-  import('../pages/admin/TeachersPage').then((m) => ({ default: m.TeachersPage })),
+  import('../pages/admin_pages/TeachersPage').then((m) => ({ default: m.TeachersPage })),
 )
 
 const UsersPage = lazy(() =>
-  import('../pages/admin/UsersPage').then((m) => ({ default: m.UsersPage })),
+  import('../pages/admin_pages/UsersPage').then((m) => ({ default: m.UsersPage })),
 )
 
 const EstudianteProfilePage = lazy(() =>

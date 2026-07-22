@@ -11,9 +11,20 @@ export function LoginPage({ onSwitchToRegister }) {
 
       <LoginForm />
 
-      <button type="button" className="auth-switch" onClick={onSwitchToRegister}>
-        Ir a registrarse
-      </button>
+      <div className="auth-footer">
+        <p className="toggle-text">
+          ¿No tienes cuenta?{' '}
+          <a href="#" className="toggle-link" onClick={(e) => { e.preventDefault(); onSwitchToRegister(); }}>
+            Regístrate
+          </a>
+        </p>
+        <p className="terms-text">
+          Al continuar, aceptas los{' '}
+          <a href="/terms" className="legal-link">Términos de Servicio</a> y la{' '}
+          <a href="/privacy" className="legal-link">Política de Privacidad</a>,{' '}
+          y recibir correos periódicos con actualizaciones.
+        </p>
+      </div>
     </div>
   )
 }

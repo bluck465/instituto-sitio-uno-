@@ -7,6 +7,7 @@
 @import './styles/auth.css';
 @import './styles/components.css';
 @import './styles/dashboard.css';
+@import './shared/components/PhoneField.css';
 
 /* ── Theme toggle transitions ─────────────────────────────────── */
 *,
