@@ -1,0 +1,37 @@
+.edit-profile__loading {
+  text-align: center;
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.edit-profile__actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.edit-profile__cancel {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 14px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.edit-profile__cancel:hover {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .edit-profile__actions {
+    grid-template-columns: 1fr;
+  }
+}

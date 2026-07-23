@@ -32,7 +32,7 @@ export const supabaseAuth = {
       password: payload.password,
       options: {
         data: { rol, activo },
-        emailRedirectTo: `https://institutositiouno.vercel.app/auth/callback?rol=${rol}`,
+        emailRedirectTo: `${window.location.origin}/auth/callback?rol=${rol}`,
       },
     })
 

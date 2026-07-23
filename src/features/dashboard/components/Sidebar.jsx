@@ -27,6 +27,13 @@ export function Sidebar() {
       <nav>
         <ul>
           <li><Link to={getHomePath()}>Resumen</Link></li>
+          {user?.rol === 'estudiante' && (
+            <>
+              <li><Link to="/dashboard/inscripcion">Inscripción</Link></li>
+              <li><Link to="/dashboard/pagos">Mis pagos</Link></li>
+            </>
+          )}
+          <li><Link to="/profile/editar">Editar perfil</Link></li>
         </ul>
       </nav>
 

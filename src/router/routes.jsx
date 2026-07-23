@@ -54,6 +54,18 @@ const CallbackPage = lazy(() =>
   import('../features/auth/pages/CallbackPage').then((m) => ({ default: m.CallbackPage })),
 )
 
+const EditProfilePage = lazy(() =>
+  import('../pages/EditProfilePage').then((m) => ({ default: m.EditProfilePage })),
+)
+
+const MisPagosPage = lazy(() =>
+  import('../pages/student_pages/MisPagosPage').then((m) => ({ default: m.MisPagosPage })),
+)
+
+const InscripcionPage = lazy(() =>
+  import('../pages/student_pages/InscripcionPage').then((m) => ({ default: m.InscripcionPage })),
+)
+
 export const routes = [
   { path: '/', element: <LandingPage /> },
 
@@ -90,6 +102,15 @@ export const routes = [
   },
 
   {
+    path: '/profile/editar',
+    element: (
+      <ProtectedRoute>
+        <EditProfilePage />
+      </ProtectedRoute>
+    ),
+  },
+
+  {
     path: '/dashboard',
     element: (
       <ProtectedRoute>
@@ -98,6 +119,8 @@ export const routes = [
     ),
     children: [
       { index: true, element: <DashboardPage /> },
+      { path: 'pagos', element: <MisPagosPage /> },
+      { path: 'inscripcion', element: <InscripcionPage /> },
     ],
   },
 

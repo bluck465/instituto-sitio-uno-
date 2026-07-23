@@ -4,22 +4,30 @@ import { storage } from '../../services/storage'
 
 const LS_KEY = 'preferredCountry'
 
-function getInitialCountry(defaultCode) {
-  const saved = storage.get(LS_KEY)
-  if (saved) {
-    const found = countryCodes.find((c) => c.code === saved)
-    if (found) return found
+function parsePhoneValue(defaultValue, defaultCode) {
+  if (!defaultValue || typeof defaultValue !== 'string') return { code: defaultCode, number: '' }
+  const parts = defaultValue.trim().split(' ')
+  if (parts.length >= 2 && parts[0].startsWith('+')) {
+    return { code: parts[0], number: parts.slice(1).join('') }
   }
-  const fallback = countryCodes.find((c) => c.code === defaultCode)
-  if (fallback) return fallback
-  return countryCodes[0]
+  return { code: defaultCode, number: defaultValue }
 }
 
-export function PhoneField({ name = 'telefono', defaultCountry = '+58', required = false }) {
-  const [selected, setSelected] = useState(() => getInitialCountry(defaultCountry))
+export function PhoneField({ name = 'telefono', defaultCountry = '+58', defaultValue = '', required = false }) {
+  const parsed = parsePhoneValue(defaultValue, defaultCountry)
+  const [selected, setSelected] = useState(() => {
+    const saved = storage.get(LS_KEY)
+    if (saved) {
+      const found = countryCodes.find((c) => c.code === saved)
+      if (found) return found
+    }
+    const fallback = countryCodes.find((c) => c.code === parsed.code)
+    if (fallback) return fallback
+    return countryCodes[0]
+  })
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
-  const [localNumber, setLocalNumber] = useState('')
+  const [localNumber, setLocalNumber] = useState(parsed.number)
   const inputRef = useRef(null)
   const rootRef = useRef(null)
 
