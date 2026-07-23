@@ -20,7 +20,14 @@ if (!supabaseUrl || !supabaseKey) {
     `VITE_SUPABASE_ANON_KEY: ${supabaseKey ? 'OK' : 'FALTANTE'}`
   )
 } else {
-  supabase = createClient(supabaseUrl, supabaseKey);
+  supabase = createClient(supabaseUrl, supabaseKey, {
+    auth: {
+      flowType: 'pkce',
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: true,
+    },
+  });
 }
 
 export { supabase };

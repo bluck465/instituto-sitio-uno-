@@ -9,8 +9,33 @@ function getProfilePath(rol) {
   return '/profile/estudiante'
 }
 
-function exchangeCode(code) {
-  return supabase.auth.exchangeCodeForSession(code)
+function parseHashParams() {
+  const hash = window.location.hash
+  if (!hash || hash.length <= 1) return {}
+  return Object.fromEntries(new URLSearchParams(hash.slice(1)).entries())
+}
+
+const ERROR_MESSAGES = {
+  otp_expired: 'El enlace de verificación ha expirado. Regístrate de nuevo para recibir uno nuevo.',
+  access_denied: 'Acceso denegado. El enlace no es válido.',
+  email_not_confirmed: 'El correo no ha sido confirmado.',
+}
+
+function getInitialState(code) {
+  const hash = parseHashParams()
+
+  if (hash.error) {
+    const message = ERROR_MESSAGES[hash.error_code]
+      || hash.error_description
+      || 'Error de verificación.'
+    return { status: 'error', errorMessage: message }
+  }
+
+  if (code || hash.access_token) {
+    return { status: 'verifying', errorMessage: null }
+  }
+
+  return { status: 'error', errorMessage: 'No se encontró el código de verificación.' }
 }
 
 export function CallbackPage() {
@@ -18,28 +43,43 @@ export function CallbackPage() {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   const rol = searchParams.get('rol') || 'estudiante'
-  const [status, setStatus] = useState(() => (code ? 'verifying' : 'error'))
-  const [errorMessage, setErrorMessage] = useState(() =>
-    code ? null : 'No se encontró el código de verificación.',
-  )
+
+  const initial = getInitialState(code)
+  const [status, setStatus] = useState(initial.status)
+  const [errorMessage, setErrorMessage] = useState(initial.errorMessage)
   const hasExchanged = useRef(false)
 
   useEffect(() => {
-    if (!code || hasExchanged.current) return
+    if (status !== 'verifying' || hasExchanged.current) return
     hasExchanged.current = true
 
-    let cancelled = false
-    exchangeCode(code).then(({ error }) => {
-      if (cancelled) return
-      if (error) {
-        setStatus('error')
-        setErrorMessage(error.message || 'No se pudo verificar el correo.')
-        return
-      }
-      setStatus('success')
-    })
-    return () => { cancelled = true }
-  }, [code])
+    const hash = parseHashParams()
+
+    if (code) {
+      let cancelled = false
+      supabase.auth.exchangeCodeForSession(code).then(({ error }) => {
+        if (cancelled) return
+        if (error) {
+          setStatus('error')
+          setErrorMessage(error.message || 'No se pudo verificar el correo.')
+          return
+        }
+        setStatus('success')
+      })
+      return () => { cancelled = true }
+    }
+
+    if (hash.access_token) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) {
+          setStatus('success')
+        } else {
+          setStatus('error')
+          setErrorMessage('No se pudo establecer la sesión.')
+        }
+      })
+    }
+  }, [status, code])
 
   useEffect(() => {
     if (status !== 'success') return
@@ -48,18 +88,7 @@ export function CallbackPage() {
   }, [status, rol, navigate])
 
   const handleRetry = () => {
-    if (!code) return
-    setStatus('verifying')
-    setErrorMessage(null)
-    hasExchanged.current = false
-    exchangeCode(code).then(({ error }) => {
-      if (error) {
-        setStatus('error')
-        setErrorMessage(error.message || 'No se pudo verificar el correo.')
-        return
-      }
-      setStatus('success')
-    })
+    window.location.href = '/register'
   }
 
   return (
@@ -87,7 +116,7 @@ export function CallbackPage() {
                 className="callback-button callback-button--primary"
                 onClick={handleRetry}
               >
-                Reintentar
+                Volver al registro
               </button>
               <button
                 className="callback-button callback-button--secondary"
