@@ -25,26 +25,25 @@ export const supabaseAuth = {
 
   async register(payload) {
     const rol = payload.rol || 'estudiante'
+    const activo = payload.activo !== undefined ? payload.activo : true
+
     const { data, error } = await supabase.auth.signUp({
       email: payload.email,
       password: payload.password,
       options: {
-        data: {
-          rol,
-          activo: payload.activo !== undefined ? payload.activo : true,
-        },
+        data: { rol, activo },
         emailRedirectTo: `https://institutositiouno.vercel.app/auth/callback?rol=${rol}`,
       },
     })
 
     if (error) throw error
 
-    const { error: userError } = await supabase.from('usuarios').insert({
+    const { error: userError } = await supabase.from('usuarios').upsert({
       id: data.user.id,
       email: payload.email,
-      rol: payload.rol || 'estudiante',
-      activo: payload.activo !== undefined ? payload.activo : true,
-    })
+      rol,
+      activo,
+    }, { onConflict: 'id' })
     if (userError) throw userError
 
     return this.login(payload.email, payload.password)
@@ -58,11 +57,24 @@ export const supabaseAuth = {
       : rol === 'profesor' ? 'profesores'
       : 'administradores'
 
-    const { error } = await supabase.from(table).insert({
-      usuario_id: user.id,
-      ...profileData,
-    })
-    if (error) throw error
+    const { data: existing } = await supabase
+      .from(table)
+      .select('usuario_id')
+      .eq('usuario_id', user.id)
+      .maybeSingle()
+
+    if (existing) {
+      const { error } = await supabase
+        .from(table)
+        .update(profileData)
+        .eq('usuario_id', user.id)
+      if (error) throw error
+    } else {
+      const { error } = await supabase
+        .from(table)
+        .insert({ usuario_id: user.id, ...profileData })
+      if (error) throw error
+    }
   },
 
   async getProfile(rol) {
