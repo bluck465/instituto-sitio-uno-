@@ -50,11 +50,17 @@ const AdministradorProfilePage = lazy(() =>
   import('../pages/AdministradorProfilePage').then((m) => ({ default: m.AdministradorProfilePage })),
 )
 
+const CallbackPage = lazy(() =>
+  import('../features/auth/pages/CallbackPage').then((m) => ({ default: m.CallbackPage })),
+)
+
 export const routes = [
   { path: '/', element: <LandingPage /> },
 
   { path: '/login', element: <AuthOverlay mode="login" /> },
   { path: '/register', element: <AuthOverlay mode="register" /> },
+
+  { path: '/auth/callback', element: <CallbackPage /> },
 
   {
     path: '/profile/estudiante',
