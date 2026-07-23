@@ -10,6 +10,7 @@ export function EmailVerificationModal() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
   const [email, setEmail] = useState(null)
+  const [rol, setRol] = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -28,6 +29,7 @@ export function EmailVerificationModal() {
       const pendingEmail = storage.get('pendingVerificationEmail')
       if (pendingEmail && !cancelled) {
         setEmail(pendingEmail)
+        setRol(storage.get('pendingVerificationRol') || 'estudiante')
         setVisible(true)
       }
     }
@@ -39,7 +41,13 @@ export function EmailVerificationModal() {
   const handleResend = async () => {
     setLoading(true)
     setMessage(null)
-    const { error } = await supabase.auth.resend({ type: 'signup', email })
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: {
+        emailRedirectTo: `https://institutositiouno.vercel.app/auth/callback?rol=${rol || 'estudiante'}`,
+      },
+    })
     setLoading(false)
     setMessage(error
       ? 'No se pudo reenviar. Intenta de nuevo en unos minutos.'
@@ -56,6 +64,7 @@ export function EmailVerificationModal() {
 
       if (user?.email_confirmed_at) {
         storage.remove('pendingVerificationEmail')
+        storage.remove('pendingVerificationRol')
         setVisible(false)
         setLoading(false)
         return
@@ -77,6 +86,7 @@ export function EmailVerificationModal() {
 
   const handleClose = () => {
     storage.remove('pendingVerificationEmail')
+    storage.remove('pendingVerificationRol')
     navigate('/')
   }
 

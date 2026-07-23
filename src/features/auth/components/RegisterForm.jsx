@@ -80,6 +80,7 @@ export function RegisterForm() {
     } catch (err) {
       if (err.message?.includes('Email not confirmed')) {
         storage.set('pendingVerificationEmail', payload.email)
+        storage.set('pendingVerificationRol', payload.rol || 'estudiante')
 
         const rol = payload.rol || 'estudiante'
         if (rol === 'profesor') navigate('/profile/docente')
