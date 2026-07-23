@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import {
   loginUser as apiLogin,
   registerUser as apiRegister,
@@ -7,6 +7,7 @@ import {
   logoutUser
 } from '../features/auth/services/authService'
 import { storage } from '../services/storage'
+import { supabase } from '../lib/supabaseClient'
 
 // ── Estado inicial desde el servicio de storage ──
 function getToken() { return storage.get('token') }
@@ -22,6 +23,20 @@ export function AuthProvider({ children }) {
   const [user, setUserState] = useState(getUser)
   const [token, setTokenState] = useState(getToken)
   const isAuthenticated = !!token && !!user
+
+  useEffect(() => {
+    const validateSession = async () => {
+      if (!token) return
+      const { error } = await supabase.auth.getUser()
+      if (error) {
+        removeToken()
+        removeUser()
+        setUserState(null)
+        setTokenState(null)
+      }
+    }
+    validateSession()
+  }, [])
 
   const login = useCallback(async (email, password) => {
     const response = await apiLogin({ email, password })
