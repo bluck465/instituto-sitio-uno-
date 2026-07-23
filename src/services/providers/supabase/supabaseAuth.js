@@ -24,14 +24,16 @@ export const supabaseAuth = {
   },
 
   async register(payload) {
+    const rol = payload.rol || 'estudiante'
     const { data, error } = await supabase.auth.signUp({
       email: payload.email,
       password: payload.password,
       options: {
         data: {
-          rol: payload.rol || 'estudiante',
+          rol,
           activo: payload.activo !== undefined ? payload.activo : true,
         },
+        emailRedirectTo: `https://institutositiouno.vercel.app/auth/callback?rol=${rol}`,
       },
     })
 
