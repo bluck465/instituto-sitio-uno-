@@ -44,6 +44,7 @@ export function AuthProvider({ children }) {
     setTokenState(response.token)
     setUser(response.user)
     setUserState(response.user)
+    storage.remove('pendingVerificationPassword')
     return response
   }, [])
 

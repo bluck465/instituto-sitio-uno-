@@ -12,12 +12,18 @@ export const supabaseAuth = {
 
     if (error) throw error
 
+    const { data: usuario } = await supabase
+      .from('usuarios')
+      .select('rol, activo')
+      .eq('id', data.user.id)
+      .maybeSingle()
+
     return {
       user: {
         id: data.user.id,
         email: data.user.email,
-        rol: data.user.user_metadata?.rol || 'estudiante',
-        activo: data.user.user_metadata?.activo ?? true,
+        rol: usuario?.rol || data.user.user_metadata?.rol || 'estudiante',
+        activo: usuario?.activo ?? data.user.user_metadata?.activo ?? true,
       },
       token: data.session.access_token,
     }

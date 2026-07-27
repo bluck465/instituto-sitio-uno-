@@ -9,10 +9,12 @@ function getProfilePath(rol) {
   return '/profile/estudiante'
 }
 
-function parseHashParams() {
-  const hash = window.location.hash
-  if (!hash || hash.length <= 1) return {}
-  return Object.fromEntries(new URLSearchParams(hash.slice(1)).entries())
+function parseAllParams() {
+  const search = Object.fromEntries(new URLSearchParams(window.location.search).entries())
+  const hash = window.location.hash.length > 1
+    ? Object.fromEntries(new URLSearchParams(window.location.hash.slice(1)).entries())
+    : {}
+  return { ...hash, ...search }
 }
 
 const ERROR_MESSAGES = {
@@ -22,16 +24,16 @@ const ERROR_MESSAGES = {
 }
 
 function getInitialState(code) {
-  const hash = parseHashParams()
+  const params = parseAllParams()
 
-  if (hash.error) {
-    const message = ERROR_MESSAGES[hash.error_code]
-      || hash.error_description
+  if (params.error) {
+    const message = ERROR_MESSAGES[params.error_code]
+      || params.error_description
       || 'Error de verificación.'
     return { status: 'error', errorMessage: message }
   }
 
-  if (code || hash.access_token) {
+  if (code || params.access_token) {
     return { status: 'verifying', errorMessage: null }
   }
 
@@ -53,7 +55,7 @@ export function CallbackPage() {
     if (status !== 'verifying' || hasExchanged.current) return
     hasExchanged.current = true
 
-    const hash = parseHashParams()
+    const params = parseAllParams()
 
     if (code) {
       let cancelled = false
@@ -69,7 +71,7 @@ export function CallbackPage() {
       return () => { cancelled = true }
     }
 
-    if (hash.access_token) {
+    if (params.access_token) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (session) {
           setStatus('success')

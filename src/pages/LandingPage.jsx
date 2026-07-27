@@ -12,7 +12,15 @@
  * al inicio del archivo para facilitar su mantenimiento.
  */
 
+import { useState, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { BrandHeader, HeroSection, SectionHeading, ValueGrid, SiteFooter } from '../components'
+
+const AUTH_ERROR_MESSAGES = {
+  otp_expired: 'El enlace de verificación ha expirado. Revisa tu correo y haz clic en el enlace más reciente, o solicita uno nuevo.',
+  access_denied: 'El enlace no es válido. Puede que ya lo hayas usado. Solicita uno nuevo desde el registro.',
+  email_not_confirmed: 'Tu correo aún no ha sido confirmado. Revisa tu bandeja de entrada.',
+}
 
 // ── Contenido estático de la landing ─────────────────────────────────
 // Cada objeto agrupa los textos de una sección para mantener el JSX limpio.
@@ -62,10 +70,56 @@ const values = {
 }
 
 export function LandingPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const [authError, setAuthError] = useState(null)
+
+  useEffect(() => {
+    const error = searchParams.get('error')
+    const errorCode = searchParams.get('error_code')
+    const errorDescription = searchParams.get('error_description')
+
+    if (error) {
+      const message = AUTH_ERROR_MESSAGES[errorCode]
+        || errorDescription
+        || 'Ocurrió un error al verificar tu correo.'
+      setAuthError(message)
+
+      const cleaned = new URLSearchParams(searchParams)
+      cleaned.delete('error')
+      cleaned.delete('error_code')
+      cleaned.delete('error_description')
+      cleaned.delete('sb')
+      setSearchParams(cleaned, { replace: true })
+    }
+  }, [])
+
   return (
     <div className="landing-page">
       <main className="page-content">
         <BrandHeader />
+
+        {authError && (
+          <div className="auth-error" style={{ margin: '0 0 20px' }}>
+            <p>{authError}</p>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+              <button
+                className="auth-button"
+                style={{ minWidth: 'auto', padding: '8px 16px' }}
+                onClick={() => navigate('/register')}
+              >
+                Registrarse de nuevo
+              </button>
+              <button
+                className="auth-button"
+                style={{ minWidth: 'auto', padding: '8px 16px', background: 'transparent', color: '#b91c1c', border: '1px solid #b91c1c' }}
+                onClick={() => navigate('/login')}
+              >
+                Ir al login
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Hero: sección principal con CTA de login/registro */}
         <HeroSection content={hero} />

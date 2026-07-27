@@ -64,28 +64,45 @@ export function EmailVerificationModal() {
 
       if (user?.email_confirmed_at) {
         storage.remove('pendingVerificationEmail')
+        storage.remove('pendingVerificationPassword')
         storage.remove('pendingVerificationRol')
         setVisible(false)
         setLoading(false)
         return
       }
     } catch {
-      // Sin sesion activa, getUser() falla con 403 — es esperado
+      // Sin sesion activa, getUser() falla con 403 — intentar re-login abajo
     }
 
     const pendingEmail = storage.get('pendingVerificationEmail')
-    if (pendingEmail) {
-      setMessage('Tu correo aun no ha sido confirmado. Revisa tu bandeja y haz clic en el enlace de verificacion.')
-      setLoading(false)
-      return
+    const pendingPassword = storage.get('pendingVerificationPassword')
+
+    if (pendingEmail && pendingPassword) {
+      try {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: pendingEmail,
+          password: pendingPassword,
+        })
+        if (!error) {
+          storage.remove('pendingVerificationEmail')
+          storage.remove('pendingVerificationPassword')
+          storage.remove('pendingVerificationRol')
+          setVisible(false)
+          setLoading(false)
+          return
+        }
+      } catch {
+        // Login falló — email aún no confirmado
+      }
     }
 
-    setMessage('Tu correo aun no ha sido confirmado. Revisa tu bandeja.')
+    setMessage('Tu correo aún no ha sido confirmado. Revisa tu bandeja y haz clic en el enlace de verificación.')
     setLoading(false)
   }
 
   const handleClose = () => {
     storage.remove('pendingVerificationEmail')
+    storage.remove('pendingVerificationPassword')
     storage.remove('pendingVerificationRol')
     navigate('/')
   }
