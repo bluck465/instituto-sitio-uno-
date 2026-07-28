@@ -4,14 +4,15 @@ import { useAuth } from '../../../contexts/AuthContext'
 const MODULES = [
   { path: '/admin', label: 'Dashboard', icon: '📊' },
   { path: '/admin/usuarios', label: 'Usuarios', icon: '👥' },
-  { path: '/admin/academico', label: 'Académico', icon: '📚' },
+  { path: '/admin/carreras', label: 'Carreras', icon: '🎓' },
+  { path: '/admin/academico', label: 'Asignaturas', icon: '📚' },
   { path: '/admin/estudiantes', label: 'Estudiantes', icon: '🎓' },
   { path: '/admin/docentes', label: 'Docentes', icon: '👨‍🏫' },
-  { path: '/admin/calificaciones', label: 'Calificaciones', icon: '📝' },
+  { path: '/admin/periodos', label: 'Periodos', icon: '📅' },
+  { path: '/admin/secciones', label: 'Secciones', icon: '🏫' },
+  { path: '/admin/inscripciones', label: 'Inscripciones', icon: '📝' },
+  { path: '/admin/calificaciones', label: 'Calificaciones', icon: '📊' },
   { path: '/admin/finanzas', label: 'Finanzas', icon: '💰' },
-  { path: '/admin/reportes', label: 'Reportes', icon: '📈' },
-  { path: '/admin/auditoria', label: 'Auditoría', icon: '🔍' },
-  { path: '/admin/configuracion', label: 'Configuración', icon: '⚙️' },
 ]
 
 export function AdminSidebar() {

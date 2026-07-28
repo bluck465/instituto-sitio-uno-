@@ -29,20 +29,29 @@ export function AdminPage() {
       <section className="dashboard-section">
         <h3>Acceso rapido</h3>
         <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '12px' }}>
-          <Link to="/admin/estudiantes" className="header-action solid" style={{ textDecoration: 'none' }}>
-            Ver estudiantes
+          <Link to="/admin/carreras" className="header-action solid" style={{ textDecoration: 'none' }}>
+            Gestionar carreras
+          </Link>
+          <Link to="/admin/academico" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Asignaturas
+          </Link>
+          <Link to="/admin/periodos" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Periodos
+          </Link>
+          <Link to="/admin/secciones" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Secciones
+          </Link>
+          <Link to="/admin/inscripciones" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Inscripciones
+          </Link>
+          <Link to="/admin/estudiantes" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
+            Estudiantes
           </Link>
           <Link to="/admin/docentes" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
-            Ver docentes
+            Docentes
           </Link>
           <Link to="/admin/usuarios" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
-            Gestionar usuarios
-          </Link>
-          <Link to="/admin/finanzas" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
-            Ver pagos
-          </Link>
-          <Link to="/admin/materias" className="header-action outline" style={{ textDecoration: 'none', border: '1px solid var(--border)', color: 'var(--text)', background: 'white' }}>
-            Ver materias
+            Usuarios
           </Link>
         </div>
       </section>

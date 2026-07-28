@@ -57,8 +57,8 @@ export const supabaseAcademic = {
         seccion_id,
         secciones (
           id,
-          horario,
           aula,
+          codigo_seccion,
           periodo_id,
           asignaturas (
             codigo,
@@ -75,7 +75,6 @@ export const supabaseAcademic = {
       seccion_id: insc.seccion_id,
       codigo: insc.secciones?.asignaturas?.codigo || 'N/A',
       asignatura: insc.secciones?.asignaturas?.nombre || 'Sin asignatura',
-      horario: insc.secciones?.horario || 'Por definir',
       aula: insc.secciones?.aula || 'Por definir',
     }))
 

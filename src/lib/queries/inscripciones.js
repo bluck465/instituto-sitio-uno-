@@ -5,7 +5,7 @@ export const inscripcionesQueries = {
     const { data, error } = await supabase
       .from('inscripciones')
       .select('*, estudiantes(*, usuarios!inner(email)), secciones(*, asignaturas(*), periodos_lectivos(*))')
-      .order('created_at', { ascending: false });
+      .order('id', { ascending: false });
     if (error) throw error;
     return data;
   },
@@ -13,7 +13,7 @@ export const inscripcionesQueries = {
   async getById(id) {
     const { data, error } = await supabase
       .from('inscripciones')
-      .select('*, estudiantes(*, usuarios!inner(email)), secciones(*, asignaturas(*), periodos_lectivos(*))')
+      .select('*, estudiantes(*, usuarios!inner(email)), secciones(*, asignaturas(*), periodos_lectivos(*)')
       .eq('id', id)
       .single();
     if (error) throw error;
@@ -23,9 +23,9 @@ export const inscripcionesQueries = {
   async getByEstudiante(estudianteId) {
     const { data, error } = await supabase
       .from('inscripciones')
-      .select('*, secciones(*, asignaturas(*), profesores(*, usuarios!inner(email)), periodos_lectivos(*))')
+      .select('*, secciones(*, asignaturas(*), profesores(*, usuarios!inner(email)), periodos_lectivos(*)')
       .eq('estudiante_id', estudianteId)
-      .order('created_at', { ascending: false });
+      .order('id', { ascending: false });
     if (error) throw error;
     return data;
   },
@@ -41,12 +41,21 @@ export const inscripcionesQueries = {
 
   async getByPeriodo(periodoId) {
     const { data, error } = await supabase
+      .from('secciones')
+      .select('id')
+      .eq('periodo_id', periodoId);
+    if (error) throw error;
+
+    const seccionIds = (data || []).map(s => s.id);
+    if (seccionIds.length === 0) return [];
+
+    const { data: inscripciones, error: inscError } = await supabase
       .from('inscripciones')
       .select('*, estudiantes(*, usuarios!inner(email)), secciones(*, asignaturas(*))')
-      .eq('seccion_id', 'id')
-      .order('created_at', { ascending: false });
-    if (error) throw error;
-    return data;
+      .in('seccion_id', seccionIds)
+      .order('id', { ascending: false });
+    if (inscError) throw inscError;
+    return inscripciones;
   },
 
   async create(inscripcion) {

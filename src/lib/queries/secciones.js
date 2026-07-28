@@ -4,8 +4,8 @@ export const seccionesQueries = {
   async getAll() {
     const { data, error } = await supabase
       .from('secciones')
-      .select('*, asignaturas(*), profesores(*, usuarios!inner(email)), periodos_lectivos(*)')
-      .order('created_at', { ascending: false });
+      .select('*, asignaturas(*, carreras(*)), profesores(*, usuarios!inner(email)), periodos_lectivos(*)')
+      .order('id', { ascending: false });
     if (error) throw error;
     return data;
   },
@@ -13,7 +13,7 @@ export const seccionesQueries = {
   async getById(id) {
     const { data, error } = await supabase
       .from('secciones')
-      .select('*, asignaturas(*), profesores(*, usuarios!inner(email)), periodos_lectivos(*)')
+      .select('*, asignaturas(*, carreras(*)), profesores(*, usuarios!inner(email)), periodos_lectivos(*)')
       .eq('id', id)
       .single();
     if (error) throw error;
@@ -23,9 +23,9 @@ export const seccionesQueries = {
   async getByPeriodo(periodoId) {
     const { data, error } = await supabase
       .from('secciones')
-      .select('*, asignaturas(*), profesores(*, usuarios!inner(email))')
+      .select('*, asignaturas(*, carreras(*)), profesores(*, usuarios!inner(email))')
       .eq('periodo_id', periodoId)
-      .order('horario');
+      .order('codigo_seccion');
     if (error) throw error;
     return data;
   },

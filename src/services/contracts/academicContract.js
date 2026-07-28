@@ -38,13 +38,12 @@ export const academicContract = {
    *   estado_matricula: 'activo' | 'suspendido' | 'egresado'
    * }
    *
-   * classes: [{
-   *   seccion_id: string,
-   *   codigo: string,          // Ej: "MAT101"
-   *   asignatura: string,      // Ej: "Matematicas I"
-   *   horario: Object|string,  // Ej: { lunes: "08:00-10:00" }
-   *   aula: string             // Ej: "A-301"
-   * }]
+ * classes: [{
+ *   seccion_id: string,
+ *   codigo: string,          // Ej: "MAT101"
+ *   asignatura: string,      // Ej: "Matematicas I"
+ *   aula: string             // Ej: "A-301"
+ * }]
    *
    * @example
    *   const { student, classes } = await academic.getDashboard()

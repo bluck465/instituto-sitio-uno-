@@ -69,6 +69,16 @@ export const asignaturasQueries = {
     if (error) throw error;
   },
 
+  async getByCarrera(carreraId) {
+    const { data, error } = await supabase
+      .from('asignaturas')
+      .select('*, carreras(*)')
+      .eq('carrera_id', carreraId)
+      .order('codigo');
+    if (error) throw error;
+    return data;
+  },
+
   async count() {
     const { count, error } = await supabase
       .from('asignaturas')

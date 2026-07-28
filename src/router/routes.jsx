@@ -38,6 +38,26 @@ const UsersPage = lazy(() =>
   import('../pages/admin_pages/UsersPage').then((m) => ({ default: m.UsersPage })),
 )
 
+const CarrerasPage = lazy(() =>
+  import('../pages/admin_pages/CarrerasPage').then((m) => ({ default: m.CarrerasPage })),
+)
+
+const AcademicoPage = lazy(() =>
+  import('../pages/admin_pages/AcademicoPage').then((m) => ({ default: m.AcademicoPage })),
+)
+
+const PeriodosPage = lazy(() =>
+  import('../pages/admin_pages/PeriodosPage').then((m) => ({ default: m.PeriodosPage })),
+)
+
+const SeccionesPage = lazy(() =>
+  import('../pages/admin_pages/SeccionesPage').then((m) => ({ default: m.SeccionesPage })),
+)
+
+const InscripcionesAdminPage = lazy(() =>
+  import('../pages/admin_pages/InscripcionesPage').then((m) => ({ default: m.InscripcionesPage })),
+)
+
 const EstudianteProfilePage = lazy(() =>
   import('../pages/EstudianteProfilePage').then((m) => ({ default: m.EstudianteProfilePage })),
 )
@@ -148,6 +168,11 @@ export const routes = [
       { path: 'estudiantes', element: <StudentsPage /> },
       { path: 'docentes', element: <TeachersPage /> },
       { path: 'usuarios', element: <UsersPage /> },
+      { path: 'carreras', element: <CarrerasPage /> },
+      { path: 'academico', element: <AcademicoPage /> },
+      { path: 'periodos', element: <PeriodosPage /> },
+      { path: 'secciones', element: <SeccionesPage /> },
+      { path: 'inscripciones', element: <InscripcionesAdminPage /> },
     ],
   },
 
